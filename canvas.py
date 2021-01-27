@@ -3,7 +3,7 @@ import math
 import terminal
 from colors import Color
 from gallows import gallows, possibleErrors
-        
+
 
 class Canvas:
     """Create Canvas for particular game screen."""
@@ -15,11 +15,11 @@ class Canvas:
     margin = '  '
 
     def __init__(self, gameContainer=gameContainer):
-        # Set Canvas attributes values in dictionary, so we can count them later
+        # Set Canvas attributes values in dict, so we can count them later
         self.dynamicAttributes = {
-            'title' : 'G R A   W   W I S I E L C A  -  P O L S K I E  P R Z Y S Ł O W I A',
-            'statusBar' : 'Wybierz opcję z menu powyżej.',
-            'cmdListener' : 'Co chcesz zrobić?'
+            'title': 'G R A   W   W I S I E L C A  -  P O L S K I E  P R Z Y S Ł O W I A',
+            'statusBar': 'Wybierz opcję z menu powyżej.',
+            'cmdListener': 'Co chcesz zrobić?'
         }
         self.gameContainer = gameContainer
         # Generate default attributes values based on dictionary
@@ -40,7 +40,7 @@ class Canvas:
         """
         terminalHeight = terminal.size('th')
         vMargin = terminalHeight - self.canvasLength
-        halfMargin = math.floor(vMargin/2)
+        halfMargin = math.floor(vMargin / 2)
         # Clear terminal
         terminal.clear()
         # Print GUI
@@ -56,9 +56,8 @@ class Canvas:
     def cmd_listen(self):
         cmd = input(self.cmdListener + ' ').capitalize()
         return cmd
-        
+
     def vertical_separator(self, vMargin=0):
         if (vMargin > 0):
             print()
             vMargin = vMargin - 1
-

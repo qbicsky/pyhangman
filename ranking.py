@@ -48,7 +48,7 @@ class Ranking:
         self.data = {}
         with open(jsonFile, "w", encoding="UTF-8") as file:
             json.dump(self.data, file, ensure_ascii=False, indent=4, sort_keys=True)
-    
+
     def show(self):
         """
         Return Top 5 players.
@@ -60,7 +60,7 @@ class Ranking:
         containerLen = 44
         ranking = Ranking()
         ranking = {
-            item : ranking.data.get(item).get('points')
+            item: ranking.data.get(item).get('points')
             for item in ranking.data
         }
         ranking = sorted(ranking.items(), key=operator.itemgetter(1),
@@ -68,7 +68,7 @@ class Ranking:
 
         top5rankingTitle = 'Ranking TOP 5'
 
-        evenerLen = math.ceil((containerLen-len(top5rankingTitle)) / 2)
+        evenerLen = math.ceil((containerLen - len(top5rankingTitle)) / 2)
         evener = [' ' for _ in range(evenerLen)]
         evener = ''.join(evener)
 
@@ -79,19 +79,21 @@ class Ranking:
         evener = [' ' for _ in range(evenerLen)]
         evener = ''.join(evener)
 
-        top5ranking.append(Color.DARKGREY + 'Lp. Gracz' + evener + 'Pkt' 
+        top5ranking.append(Color.DARKGREY + 'Lp. Gracz' + evener + 'Pkt'
                            + Color.END)
 
         i = 0
         for player in ranking:
-            evenerLen  = (containerLen
-                         - len(str(i+1)) - len('   ')
+            evenerLen = (containerLen
+                         - len(str(i + 1)) - len('   ')
                          - len(player[0]) - len(str(player[1]))
-            )
+                         )
             evener = ['.' for _ in range(evenerLen)]
             evener = ''.join(evener)
-            top5ranking.append(str(i+1) + '   ' + player[0]
-            + Color.DARKGREY + evener + Color.END + str(player[1]))
+            top5ranking.append(str(i + 1) + '   ' + player[0]
+                               + Color.DARKGREY + evener + Color.END
+                               + str(player[1])
+                               )
             i += 1
             if(i == 5):
                 break
@@ -109,11 +111,11 @@ class Rank:
         Add new statistics to player's data in Ranking.
 
         Args:
-            player (str, optional): Name of the player. 
+            player (str, optional): Name of the player.
                                     Defaults to 'Gal Anonim'.
-            difficulty (int, optional): Difficulty level from the Game. 
+            difficulty (int, optional): Difficulty level from the Game.
                                         Defaults to 1.
-            errors (tuple, optional): Errors made during the gameplay. 
+            errors (tuple, optional): Errors made during the gameplay.
                                       Defaults to (gallows.possibleErrors - 1).
         """
         jsonFile = Ranking().jsonFile
@@ -129,10 +131,10 @@ class Rank:
                                               'winnings', difficulty=difficulty)
 
             self.points = gallows.possibleErrors * difficulty - errors
-            
+
             pointsSum = playerRanking.get('points')
             pointsSum = pointsSum + self.points
-            pointsSum = { 'points' : pointsSum }
+            pointsSum = {'points': pointsSum}
 
             playerRanking.update(pointsSum)
         else:
@@ -140,7 +142,7 @@ class Rank:
                                               'losses', difficulty=difficulty)
 
         playerRanking = {
-            player : playerRanking
+            player: playerRanking
         }
 
         ranking.update(playerRanking)
@@ -159,16 +161,16 @@ class Rank:
                                   data.
         """
         difficultyDict = {
-            str(i) : {
-                "winnings" : 0,
-                "losses" : 0
+            str(i): {
+                "winnings": 0,
+                "losses": 0
             }
             for i in menus.difficultyMenu
         }
         playerRanking = {
-            player : {
-                "points" : 0,
-                "difficulty" : difficultyDict
+            player: {
+                "points": 0,
+                "difficulty": difficultyDict
             }
         }
         return playerRanking
@@ -187,7 +189,6 @@ class Rank:
             [type]: [description]
         """
         stat = ranking.get('difficulty').get(str(difficulty)).get(statStr)
-        stat = {statStr : stat + 1}
+        stat = {statStr: stat + 1}
         ranking.get('difficulty').get(str(difficulty)).update(stat)
         return ranking
-

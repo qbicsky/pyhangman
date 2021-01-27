@@ -1,7 +1,6 @@
 import math
 
 
-
 def gen_container(leftList, rightList):
     """
     Concatenates container sides (panels) to GUI lines.
@@ -15,7 +14,7 @@ def gen_container(leftList, rightList):
     """
     leftListLen = len(leftList)
     rightListLen = len(rightList)
-    margin = math.ceil(abs(leftListLen - rightListLen)/2)
+    margin = math.ceil(abs(leftListLen - rightListLen) / 2)
     gameContainer = list()
     if(leftListLen >= rightListLen):
         for i in range(margin):

@@ -3,19 +3,18 @@ import webbrowser
 import urllib.parse
 
 
-
 def wiki_get_proverbs():
     morePages = True
     apiProverbs = 'https://pl.wiktionary.org/w/api.php?'
     cmcontinue = str()
     proverbs = list()
     apiParams = {
-        'format' : 'json',
-        'action' : 'query',
-        'list' : 'categorymembers',
-        'cmtitle' : 'Category:Polskie_przysłowia',
-        'cmprop' : 'title',
-        'cmlimit' : 'max'
+        'format': 'json',
+        'action': 'query',
+        'list': 'categorymembers',
+        'cmtitle': 'Category:Polskie_przysłowia',
+        'cmprop': 'title',
+        'cmlimit': 'max'
     }
     while morePages is True:
         try:

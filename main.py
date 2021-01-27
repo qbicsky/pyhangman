@@ -42,9 +42,9 @@ while True:
             showRanking.print_canvas()
             cmd = showRanking.cmd_listen()
 
-            if(cmd == menus.Context_Menu.Wróć_do_Menu.value or
-                    cmd == menus.Main_Menu.Rozpocznij_grę.value or
-                    cmd == menus.Main_Menu.Zakończ.value):
+            if(cmd == menus.Context_Menu.Wróć_do_Menu.value
+                    or cmd == menus.Main_Menu.Rozpocznij_grę.value
+                    or cmd == menus.Main_Menu.Zakończ.value):
                 break
             elif(cmd == menus.Context_Menu.Wyzeruj_ranking.value):
                 Ranking().reset()
@@ -62,7 +62,7 @@ while True:
 
             difficulty = cmd
             difficultyAmount = len(menus.difficultyMenu)
-            
+
             if(difficulty.isdigit()):
                 difficulty = int(difficulty)
                 if(0 <= difficulty <= difficultyAmount):
@@ -115,18 +115,19 @@ while True:
                 if(game.errors == possibleErrors):
                     rank = Rank(game.player, game.difficulty, game.errors)
 
-                    gc = gen_container(gallows[game.errors], [Color.RED 
+                    gc = gen_container(gallows[game.errors], [Color.RED
                                        + game.drawnEntry + Color.END])
                     gameCanvas = Canvas(gc)
-                    gameCanvas.statusBar = (genericStatusBar 
+                    gameCanvas.statusBar = (genericStatusBar
                                             + 'Niestety, przegrywasz!\n'
                                             + endGameStatusBar)
                     gameCanvas.cmdListener = Canvas().cmdListener
                     gameCanvas.print_canvas()
                     cmd = gameCanvas.cmd_listen()
                 # Won game
-                elif(game.errors < possibleErrors and
-                        game.hiddenEntry == game.drawnEntry):
+                elif(game.errors < possibleErrors
+                        and game.hiddenEntry == game.drawnEntry):
+
                     rank = Rank(game.player, game.difficulty, game.errors)
 
                     declinationLastChar = int(str(rank.points)[-1])
@@ -154,16 +155,16 @@ while True:
                     cmd = gameCanvas.cmd_listen()
 
                 else:
-                    if(game.difficulty == menus.Difficulty_Levels.Normalny or 
-                            game.difficulty == menus.Difficulty_Levels.Ekstremalny):
+                    if(game.difficulty == menus.Difficulty_Levels.Normalny
+                            or game.difficulty == menus.Difficulty_Levels.Ekstremalny):
 
                         gameCanvas.statusBar = (
                             genericStatusBar
                             + 'Użyte litery '
                             + str(game.letterHistory))
 
-                    elif(game.difficulty == menus.Difficulty_Levels.Trudny or 
-                            game.difficulty == menus.Difficulty_Levels.Szaleńczy):
+                    elif(game.difficulty == menus.Difficulty_Levels.Trudny
+                            or game.difficulty == menus.Difficulty_Levels.Szaleńczy):
 
                         gameCanvas.statusBar = (
                             genericStatusBar
@@ -177,8 +178,8 @@ while True:
                     game.letterHistory.sort()
                     cmd = None
                 # Final actions
-                if(game.hiddenEntry == game.drawnEntry or
-                        game.errors == possibleErrors):
+                if(game.hiddenEntry == game.drawnEntry
+                        or game.errors == possibleErrors):
                     if(cmd == menus.Context_Menu.Zagraj_ponownie.value):
                         cmd = game.reset(game.difficulty)
                         break
@@ -186,12 +187,12 @@ while True:
                         cmd = game.reset(int(cmd))
                         break
                     elif(cmd == menus.Context_Menu.Sprawdź_znaczenie_przysłowia.value):
-                            wiki_proverb_info(game.proverb)
+                        wiki_proverb_info(game.proverb)
                     elif(cmd):
                         break
     else:
         gc = gen_container(gallows[possibleErrors],
-                menus.gen_menu(menus.mainMenu))
+                           menus.gen_menu(menus.mainMenu))
         mainMenu = Canvas(gc)
         mainMenu.print_canvas()
         cmd = mainMenu.cmd_listen()

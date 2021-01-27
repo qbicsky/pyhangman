@@ -19,7 +19,6 @@ class Game:
         self.letterHistory = list()
         self.entryList = list()
 
-
     def draw_an_entry(self):
         """
         Build proverbs database by connecting to Wiki API.
@@ -48,7 +47,6 @@ class Game:
             self.hiddenEntry = None
         return self.drawnEntry, self.hiddenEntry, self.proverb
 
-
     def check_letter(self, letter):
         """
         Check inputted letter against drawnEntry. If it is found in the
@@ -71,14 +69,13 @@ class Game:
                     self.hiddenEntry[i] = letter
                     self.entryList[i] = ' '
                     isError = False
-                    if(self.difficulty == Difficulty_Levels.Ekstremalny or
-                            self.difficulty == Difficulty_Levels.Szaleńczy):
+                    if(self.difficulty == Difficulty_Levels.Ekstremalny
+                            or self.difficulty == Difficulty_Levels.Szaleńczy):
                         break
                 i += 1
         if(isError):
             self.errors += 1
         self.hiddenEntry = ''.join(self.hiddenEntry)
-
 
     def reset(self, difficulty=1):
         """
