@@ -18,7 +18,7 @@ def return_key():
         return "Enter"
 
 
-def size(dim=False):
+def size(dim):
     """
     Returns value of terminal dimensions
 
@@ -36,5 +36,5 @@ def size(dim=False):
     for dimension in dimensions:
         if(dim == dimension):
             return dimensions[dimension]
-    else:
-        return th, tw, hp, wp
+        else:
+            return -1

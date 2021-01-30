@@ -1,17 +1,18 @@
 import random
 # Custom imports
 from wikiconnector import wiki_get_proverbs
-from menus import Difficulty_Levels
+from defmenus import DIFFICULTY_MENU
 
 
 class Game:
     """
     Creates game session.
     """
+
     def __init__(self, player='Gal Anonim', difficulty=1):
-        self.player = player
-        self.difficulty = difficulty
-        self.errors = 0
+        self.player: str = player
+        self.difficulty: int = difficulty
+        self.errors: int = 0
         self.wikiData = wiki_get_proverbs()
         self.proverb = str()
         self.drawnEntry = str()
@@ -43,8 +44,8 @@ class Game:
                 i += 1
             self.hiddenEntry = ''.join(self.hiddenEntry)
         else:
-            self.drawnEntry = None
-            self.hiddenEntry = None
+            self.drawnEntry = str()
+            self.hiddenEntry = str()
         return self.drawnEntry, self.hiddenEntry, self.proverb
 
     def check_letter(self, letter):
@@ -69,15 +70,15 @@ class Game:
                     self.hiddenEntry[i] = letter
                     self.entryList[i] = ' '
                     isError = False
-                    if(self.difficulty == Difficulty_Levels.Ekstremalny
-                            or self.difficulty == Difficulty_Levels.Szaleńczy):
+                    if(self.difficulty == DIFFICULTY_MENU.key_by_label('Ekstremalny')
+                            or self.difficulty == DIFFICULTY_MENU.key_by_label('Szaleńczy')):
                         break
                 i += 1
         if(isError):
             self.errors += 1
         self.hiddenEntry = ''.join(self.hiddenEntry)
 
-    def reset(self, difficulty=1):
+    def reset(self, difficulty=1) -> str:
         """
         Reset the game with defined difficulty.
 

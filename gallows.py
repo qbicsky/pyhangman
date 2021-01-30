@@ -63,4 +63,5 @@ gallows = {
         '  /|\\         ',
         'TTTTTTTTTTTTTT'),
 }
+
 possibleErrors = len(gallows) - 1

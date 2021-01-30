@@ -5,8 +5,9 @@ import math
 import json
 
 from colors import Color
-import menus
+
 import gallows
+from defmenus import DIFFICULTY_MENU
 
 
 class Ranking:
@@ -47,7 +48,8 @@ class Ranking:
         jsonFile = self.jsonFile
         self.data = {}
         with open(jsonFile, "w", encoding="UTF-8") as file:
-            json.dump(self.data, file, ensure_ascii=False, indent=4, sort_keys=True)
+            json.dump(self.data, file, ensure_ascii=False,
+                      indent=4, sort_keys=True)
 
     def show(self):
         """
@@ -55,7 +57,7 @@ class Ranking:
 
         Returns:
             list: Prepared list of lines for printing on Canvas
-                  with gen_container function
+                  with container Canvas method
         """
         containerLen = 44
         ranking = Ranking()
@@ -105,6 +107,7 @@ class Rank:
     Create specific player Ranking data and update based on new game.
     Then store this data in Ranking JSON file.
     """
+
     def __init__(self, player='Gal Anonim', difficulty=1,
                  errors=(gallows.possibleErrors - 1)):
         """
@@ -148,9 +151,11 @@ class Rank:
         ranking.update(playerRanking)
 
         with open(jsonFile, "w", encoding="UTF-8") as file:
-            json.dump(ranking, file, ensure_ascii=False, indent=4, sort_keys=True)
+            json.dump(ranking, file, ensure_ascii=False,
+                      indent=4, sort_keys=True)
 
-    def new_player(self, player):
+    @staticmethod
+    def new_player(player):
         """
         Create new player in the Ranking, if doesn't exists already.
 
@@ -161,11 +166,11 @@ class Rank:
                                   data.
         """
         difficultyDict = {
-            str(i): {
+            str(difficulty): {
                 "winnings": 0,
                 "losses": 0
             }
-            for i in menus.difficultyMenu
+            for difficulty in DIFFICULTY_MENU.getkeys()
         }
         playerRanking = {
             player: {
@@ -175,7 +180,8 @@ class Rank:
         }
         return playerRanking
 
-    def update_stats(self, ranking, statStr, difficulty):
+    @staticmethod
+    def update_stats(ranking, statStr, difficulty):
         """
         Adds winnings or losses to respective difficulty levels
         in form of Player's ranking dictionary.

@@ -8,6 +8,7 @@ def wiki_get_proverbs():
     apiProverbs = 'https://pl.wiktionary.org/w/api.php?'
     cmcontinue = str()
     proverbs = list()
+    connectionError = str()
     apiParams = {
         'format': 'json',
         'action': 'query',
@@ -37,7 +38,7 @@ def wiki_get_proverbs():
         return connectionError
 
 
-def wiki_proverb_info(proverb):
+def wiki_proverb_info(proverb: str):
     wikiLink = 'https://pl.wiktionary.org/wiki/'
     proverb = urllib.parse.quote(proverb)
     webbrowser.open_new_tab(wikiLink + proverb)
