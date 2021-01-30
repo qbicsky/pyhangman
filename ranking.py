@@ -13,7 +13,7 @@ from defmenus import DIFFICULTY_MENU
 class Ranking:
     """Build ranking based on JSON file."""
 
-    def __init__(self, jsonFile='ranking.json', reset=False):
+    def __init__(self, jsonFile='ranking.json'):
         """
         Load Ranking from JSON file.  If file doesn't exist,
         create one in the same folder, where script resides.
