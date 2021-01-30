@@ -60,8 +60,7 @@ class Canvas:
     def session(self, lp: list, rp: list, sb: str):
         pass
 
-    @staticmethod
-    def container(leftList, rightList):
+    def container(self, leftList, rightList):
         """
         Concatenates container sides (panels) to GUI lines.
 
@@ -75,20 +74,19 @@ class Canvas:
         leftListLen = len(leftList)
         rightListLen = len(rightList)
         margin = math.ceil(abs(leftListLen - rightListLen) / 2)
-        gameContainer = list()
+        self.gameContainer = list()
         if(leftListLen >= rightListLen):
             for i in range(margin):
-                gameContainer.append(leftList[i])
+                self.gameContainer.append(leftList[i])
             i = 0
             while i < rightListLen:
-                gameContainer.append(
+                self.gameContainer.append(
                     leftList[margin + i] + '    ' + rightList[i])
                 i += 1
             i = rightListLen + margin
             while i < leftListLen:
-                gameContainer.append(leftList[i])
+                self.gameContainer.append(leftList[i])
                 i += 1
-        return gameContainer
 
     @staticmethod
     def vertical_separator(vMargin=0):

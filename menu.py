@@ -41,21 +41,21 @@ class Menu():
             for key in self.dictionary()
         ]
 
-    def getkeys(self, mode='default'):
+    def getkeys(self, mode=None):
         """
         Return array of keys in Menu.
 
         Args:
             mode (str, optional): int -> keys are forced integers.
                                   str -> keys are forced strings.
-                                  Defaults to 'default' -> no enforced type.
+                                  Defaults to None -> no enforced type.
         """
-        if(mode == 'default'):
-            return [key for key in self.dictionary()]
-        elif(mode == 'int'):
+        if(mode == 'int'):
             return [int(key) for key in self.dictionary()]
         elif(mode == 'str'):
             return [str(key) for key in self.dictionary()]
+        else:
+            return [key for key in self.dictionary()]
 
     def key_by_label(self, label):
         Main_Menu = Enum(self.name, {
@@ -69,7 +69,7 @@ class Menu():
     def get_desc_by_key(self, key):
         return self.dictionary().get(key).get('description')
 
-    def build_list(self, align='vertical', desc=False, alt=False):
+    def build_list(self, align='vertical', descr=False, alt=False):
         menu_list = list()
         description_string = str()
         for key in self.getkeys():
@@ -78,7 +78,7 @@ class Menu():
                 keystr = str(alt_key)
             else:
                 keystr = str(key)
-            if(desc is True):
+            if(descr is True):
                 description_string = '.  ' + self.get_desc_by_key(key)
             else:
                 description_string = '  '

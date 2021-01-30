@@ -23,8 +23,8 @@ while True:
         quit()
 
     elif(cmd == MAIN_MENU.key_by_label('Rozpocznij grę')):
-        container = Canvas.container(gallows[possibleErrors], [])
-        identifyPlayer = Canvas(container)
+        identifyPlayer = Canvas()
+        identifyPlayer.container(gallows[possibleErrors], [])
         identifyPlayer.statusBar = (
             'Wpisz swoje imię lub pseudonim.'
             + 'Ta nazwa będzie używana do wpisania Twojego wyniku do rankingu.')
@@ -38,9 +38,8 @@ while True:
 
     elif(cmd == MAIN_MENU.key_by_label('Ranking TOP 5')):
         while True:
-            container = Canvas.container(
-                gallows[possibleErrors], Ranking().show())
-            showRanking = Canvas(container)
+            showRanking = Canvas()
+            showRanking.container(gallows[possibleErrors], Ranking().show())
             showRanking.statusBar = str(RANKING_MENU.build_list('horizontal'))
             showRanking.cmdListener = Canvas().cmdListener
             showRanking.print_canvas()
@@ -55,9 +54,9 @@ while True:
 
     elif(cmd == 'chooseDifficulty'):
         while True:
-            container = Canvas.container(gallows[possibleErrors],
-                                         DIFFICULTY_MENU.build_list(desc=True))
-            chooseDifficulty = Canvas(container)
+            chooseDifficulty = Canvas()
+            chooseDifficulty.container(gallows[possibleErrors],
+                                       DIFFICULTY_MENU.build_list(descr=True))
             chooseDifficulty.statusBar = (
                 'Wybrany poziom trudności będzie miał wpływ na ilość zdobytych punktów.')
             chooseDifficulty.cmdListener = 'Wybierz poziom trudności:'
@@ -78,8 +77,8 @@ while True:
 
     elif(cmd == 'gameReady'):
         # The game
-        container = Canvas.container(gallows[possibleErrors], [])
-        drawingEntry = Canvas(container)
+        drawingEntry = Canvas()
+        drawingEntry.container(gallows[possibleErrors], [])
         drawingEntry.statusBar = (
             'Łączenie do bazy Wiktionary w celu wylosowania przysłowia...')
         drawingEntry.print_canvas()
@@ -95,9 +94,6 @@ while True:
             cmd = drawingEntry.cmd_listen()
         else:
             while True:
-                container = Canvas.container(
-                    gallows[game.errors], [game.hiddenEntry])
-
                 genericStatusBar = (
                     'Grasz jako ' + game.player + ' w trybie '
                     + DIFFICULTY_MENU.label_by_key(game.difficulty).lower() + 'm. ')
@@ -106,14 +102,15 @@ while True:
                     + '\n' + Color.DARKGREY + 'lub wybierz inny poziom trudności: '
                     + str(DIFFICULTY_MENU.build_list('horizontal'))
                 )
-                gameCanvas = Canvas(container)
+                gameCanvas = Canvas()
+                gameCanvas.container(gallows[game.errors], [game.hiddenEntry])
                 # Lost game
                 if(game.errors == possibleErrors):
                     rank = Rank(game.player, game.difficulty, game.errors)
 
-                    container = Canvas.container(gallows[game.errors], [Color.RED
-                                                                        + game.drawnEntry + Color.END])
-                    gameCanvas = Canvas(container)
+                    gameCanvas = Canvas()
+                    gameCanvas.container(gallows[game.errors],
+                                         [Color.RED + game.drawnEntry + Color.END])
                     gameCanvas.statusBar = (genericStatusBar
                                             + 'Niestety, przegrywasz!\n'
                                             + endGameStatusBar)
@@ -139,9 +136,9 @@ while True:
                     else:
                         pointsStr = ' punktów'
 
-                    container = Canvas.container(gallows[game.errors],
-                                                 [Color.GREEN + game.drawnEntry + Color.END])
-                    gameCanvas = Canvas(container)
+                    gameCanvas = Canvas()
+                    gameCanvas.container(gallows[game.errors],
+                                         [Color.GREEN + game.drawnEntry + Color.END])
                     gameCanvas.statusBar = (
                         genericStatusBar + 'Wygrywasz! W tej grze zdobywasz '
                         + str(rank.points)
@@ -187,8 +184,7 @@ while True:
                     elif(cmd):
                         break
     else:
-        container = Canvas.container(gallows[possibleErrors],
-                                     MAIN_MENU.build_list())
-        mainMenu = Canvas(container)
+        mainMenu = Canvas()
+        mainMenu.container(gallows[possibleErrors], MAIN_MENU.build_list())
         mainMenu.print_canvas()
         cmd = mainMenu.cmd_listen()
