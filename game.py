@@ -52,7 +52,7 @@ class Game:
         """
         Check inputted letter against drawnEntry. If it is found in the
         entry, then replace its corresponding underscore in hiddenEntry.
-        Breaks on hard difficulties after first occurance.
+        Breaks on hard difficulties after first occurrence.
 
         Args:
             letter (char): Letter to check against the Entry.
